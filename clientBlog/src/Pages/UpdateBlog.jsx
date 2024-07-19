@@ -49,31 +49,38 @@ export default function UpdateBlog() {
 
   return (
     <>
-        <div>
-        <h2>Update Blog</h2>
-            <form onSubmit={handleSubmit} className=' p-28 text-center '>
-                <div >
-                    <label htmlFor="title">Title:</label>
-                    <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        value={blog.title}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="content">Content:</label>
-                    <textarea
-                        id="content"
-                        name="content"
-                        value={blog.content}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <button type="submit">Update Blog</button>
+        <div className=''>
+        <h2 className=' pt-20 text-center text-4xl '>UPDATE Your Blog</h2>
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+             <div className="mb-6">
+                <label htmlFor="title" className="block text-xl font-semibold mb-2 text-gray-700">Title:</label>
+                <input
+                type="text"
+                id="title"
+                name="title"
+                value={blog.title}
+                onChange={handleInputChange}
+                required
+                className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500"
+                />
+            </div>
+            <div className="mb-6">
+                <label htmlFor="content" className="block text-xl font-semibold mb-2 text-gray-700">Content:</label>
+                <textarea
+                id="content"
+                name="content"
+                value={blog.content}
+                onChange={handleInputChange}
+                required
+                className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500 h-64 resize-none"
+                />
+            </div>
+            <button 
+                type="submit"
+                className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+            >
+                Update Blog
+            </button>
             </form>
         </div>
     </>

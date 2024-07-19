@@ -54,7 +54,7 @@ export default function Home({ isLoggedIn, handleShowLogin }) {
               CREATE BLOG
             </button>
           </div>
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <div className="bg-white shadow-md rounded-lg overflow-hidden ">
             <ul className="divide-y divide-gray-200">
               <li className="px-4 py-3 hover:bg-gray-50 cursor-pointer">All Categories</li>
               <li className="px-4 py-3 hover:bg-gray-50 cursor-pointer">Music</li>
@@ -72,7 +72,7 @@ export default function Home({ isLoggedIn, handleShowLogin }) {
               <div key={index} className="bg-white shadow-xl p-4 border-b border-gray-200 rounded-lg ">
                 <img src={img3} className="h-[200px] w-full object-cover mb-4 rounded" alt="Blog" />
                 <h3 className="text-lg font-bold">{elem.title}</h3>
-                <p className="mt-2">{elem.content}</p>
+                <p className="mt-2 break-words">{elem.content}</p>
                 <p className="text-gray-500 mt-2">{elem.type}</p>
                 <p className="text-gray-500 mt-2">{elem.username}</p>
               </div>

@@ -6,6 +6,8 @@ const { authMiddleware } = require('../middleware/verifytoken'); // Update this 
 const blogrout = express.Router();
 
 blogrout.post('/newBlog', authMiddleware, blogRouters.newBlog);
+blogrout.get('/updateBlog/:id', authMiddleware, blogRouters.getBlog);
+blogrout.put('/updateBlog/:id', authMiddleware, blogRouters.updateBlog);
 blogrout.get('/allblogs', blogRouters.getBlogs);
 
 module.exports = blogrout;

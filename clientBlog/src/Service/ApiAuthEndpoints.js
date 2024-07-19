@@ -15,6 +15,7 @@ instance.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
+        console.log('Request URL:', config.url);  // Add this log
         return config;
     },
     (error) => {
@@ -22,5 +23,7 @@ instance.interceptors.request.use(
     }
 );
 
+
 export const get = (url) => instance.get(url);
 export const post = (url, data) => instance.post(url, data);
+export const put = (url, data) => instance.put(url, data);

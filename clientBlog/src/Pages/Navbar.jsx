@@ -72,8 +72,8 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn, showLogin, setShowLo
             <div className="fixed w-full z-50 bg-white shadow-md">
                 <nav className=" hidden lg:flex container mx-auto justify-center py-4 space-x-14 text-2xl">
                     <Link to="/" className="text-black font-thin hover:text-gray-600">Home</Link>
-                    <a href="#" className="text-black font-thin hover:text-gray-600">About</a>
-                    <a href="#" className="text-black font-thin hover:text-gray-600">Contact</a>
+                    <a href="https://drive.google.com/file/d/19wBrTUrNSddmwF-_f1qSOTY4u33p5ND7/view?usp=sharing" className="text-black font-thin hover:text-gray-600">About</a>
+                    <a href="https://www.linkedin.com/in/naman-gupta-914a6822a/" className="text-black font-thin hover:text-gray-600">Contact</a>
                     {isLoggedIn ? (
                         <span className="text-black font-thin">Welcome, {username}</span>
                     ) : (

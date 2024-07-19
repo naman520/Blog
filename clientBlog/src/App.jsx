@@ -6,6 +6,7 @@ import Login from './Pages/Login'
 import Register from './Pages/Register'
 import Navbar from './Pages/Navbar'
 import Profile from './Pages/Profile'
+import UpdateBlog from './Pages/UpdateBlog'
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,6 +31,7 @@ export default function App() {
           <Route path='/profile' element={<Profile setIsLoggedIn={setIsLoggedIn} />} />
           <Route path='newblog' element={<Blog isLoggedIn={isLoggedIn} />} />
           <Route path='register' element={<Register />} />
+          <Route path='/updateBlog/:id' element={<UpdateBlog />} />
         </Routes>
       </BrowserRouter>
     </div>

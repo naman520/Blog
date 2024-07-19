@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { get } from '../Service/ApiAuthEndpoints';
 import { useNavigate } from 'react-router-dom';
 
+
 function MyBlogs() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState('Blog');
+    const [updateBlog, setUpdateBlog] = useState('');
 
     useEffect(() => {
         fetchUserBlogs();
@@ -22,7 +25,6 @@ function MyBlogs() {
             setError('Failed to fetch blogs. Please try again.');
             setLoading(false);
             if (error.response && error.response.status === 401) {
-                // User is not authenticated
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('username');
                 navigate('/');
@@ -30,25 +32,66 @@ function MyBlogs() {
         }
     };
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+    const handleTabClick = (tabName) => {
+        setActiveTab(tabName);
+    };
+
+    if (loading) return <div className="text-white text-center p-4">Loading...</div>;
+    if (error) return <div className="text-red-500 text-center p-4">{error}</div>;
 
     return (
-        <div>
-            <h2 className=' pt-44 text-center font-semibold text-3xl'>Your Blogs</h2>
-            {blogs.length === 0 ? (
-                <p className=' text-center p-20'>You haven't published any blogs yet.</p>
-            ) : (
-              <ul className="container mx-auto p-4 shadow-xl shadow-teal-700 mt-8 rounded-lg bg-white">
-              {blogs.map(blog => (
-                <li key={blog._id} className="mb-6 p-4 border-b last:border-none border-gray-200">
-                  <h3 className="text-xl font-bold mb-2 text-teal-700">{blog.title}</h3>
-                  <p className="text-gray-700">{blog.content.substring(0, 100)}...</p>
-                </li>
-              ))}
-            </ul>
-            
-            )}
+        <div className="bg-gray-900 min-h-screen p-4">
+            <div className="max-w-4xl mt-40 mx-auto">
+                <div className="flex justify-center mb-8">
+                    {['Blog', 'Saved'].map(tab => (
+                        <button
+                            key={tab}
+                            className={`px-6 py-2 text-lg ${
+                                activeTab === tab ? 'text-yellow-400 border-b-2 border-yellow-400' : 'text-gray-400'
+                            }`}
+                            onClick={() => handleTabClick(tab)}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </div>
+
+                <div className="bg-green-900 rounded-lg overflow-hidden">
+                    <div className="grid grid-cols-2 bg-green-800 p-4">
+                        <div className="font-bold text-white">Title</div>
+                        <div className="font-bold text-white text-right">Content</div>
+                    </div>
+                    
+                    {activeTab === 'Blog' ? (
+                        blogs.length === 0 ? (
+                            <p className="text-white text-center p-4">You haven't published any blogs yet.</p>
+                        ) : (
+                            blogs.map((blog, index) => (
+                                <div 
+                                    key={blog._id} 
+                                    className={`grid grid-cols-2 p-4 ${index % 2 === 0 ? 'bg-green-700' : 'bg-green-800'} relative group`}
+                                >
+                                    <div className="text-white">{blog.title}</div>
+                                    <div className="text-white text-right">{blog.content.substring(0, 50)}...</div>
+                                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <button 
+                                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                                            onClick={() => navigate(`/updateBlog/${blog._id}`)}
+                                        >
+                                            Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        )): (
+                            <p className="text-white text-center p-4">Saved items feature is coming soon!</p>
+                        )}
+                </div>
+            </div>
+            <div className='mt-48 text-center'>
+                {activeTab === 'Blog'}
+                {activeTab === 'Saved'}
+            </div>
         </div>
     );
 }
